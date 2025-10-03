@@ -31,7 +31,7 @@
 </pre>
 
 ## Запуск
-```shell
+```gitbash
 python main.py
 ```
 
