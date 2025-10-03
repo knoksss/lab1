@@ -3,14 +3,21 @@ def power_function(entrance_str):
 
     st = entrance_str
 
-    # проверяем, что в выражении
-    # нету букв
+    count_znaki = 0
+    for i in '-+*/^':
+        if st.count(i) != 0:
+            count_znaki += 1
+    if count_znaki == 0:
+        raise ValueError("Некорректно введено выражение: нет арифметических символов")
+
     while ')' in entrance_str:
-        entrance_str = entrance_str.replace(')', '')
+        entrance_str = entrance_str.replace(')', ' ')
 
     while '(' in entrance_str:
         entrance_str = entrance_str.replace('(', '')
 
+    # проверяем, что в выражении нету 
+    # букв и что оно начинается с цифры
     for i in 'QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm':
         while i in st:
             st = st.replace(i, '@')
@@ -18,9 +25,9 @@ def power_function(entrance_str):
         while i in st:
             st = st.replace(i, '@')
     if st.count('@') != 0:
-        raise ValueError("Неподдерживаемые символы")
+        raise ValueError("Неподдерживаемые символы: буквы")
     if entrance_str[0] not in '0123456789':
-        raise ValueError("Некорректно введено выражение")
+        raise ValueError("Некорректно введено выражение: начинается не с цифры")
 
     for i in '-+*/^':
         entrance_str = entrance_str.replace(i, ' '+str(i))
