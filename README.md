@@ -37,7 +37,7 @@ python main.py
 
 ## Тестирование
 Проект использует pytest 8.4.2 Запуск тестов:
-```shell
+```gitbash
 pytest -v
 ```
 
