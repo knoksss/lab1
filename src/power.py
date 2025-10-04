@@ -36,7 +36,7 @@ def power_function(entrance_str):
     while '  ' in entrance_str:
         entrance_str = entrance_str.replace('  ', ' ')
     for i in '-+/*^':
-        if i + '))' in entrance_str:
+        if i + '))' in st:
             raise ValueError("Некорректно введено выражение")
 
     mas = entrance_str.split()
