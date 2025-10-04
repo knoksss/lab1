@@ -8,7 +8,7 @@ def power_function(entrance_str):
         if st.count(i) != 0:
             count_znaki += 1
     if count_znaki == 0:
-        raise ValueError("Некорректно введено выражение: нет арифметических символов")
+        raise ValueError("Некорректно введено выражение")
 
     while ')' in entrance_str:
         entrance_str = entrance_str.replace(')', ' ')
@@ -97,7 +97,6 @@ def power_function(entrance_str):
     # анализируем выражение, чтобы
     # получить ответ(считаем)
     for i in mas:
-        print(i)
         if i == '+':
             if len(a) < 2:
                 raise ValueError("Некорректно введено выражение")
