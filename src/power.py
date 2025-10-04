@@ -92,8 +92,7 @@ def power_function(entrance_str):
         pop(a)
         push(a, y ** x)
 
-    print(mas)
-
+    
     # анализируем выражение, чтобы
     # получить ответ(считаем)
     for i in mas:
