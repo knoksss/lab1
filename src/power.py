@@ -4,7 +4,7 @@ def power_function(entrance_str):
     st = entrance_str
 
     count_znaki = 0
-    for i in '-+*/^':
+    for i in '-+*/^~':
         if st.count(i) != 0:
             count_znaki += 1
     if count_znaki == 0:
@@ -16,7 +16,7 @@ def power_function(entrance_str):
     while '(' in entrance_str:
         entrance_str = entrance_str.replace('(', '')
 
-    # проверяем, что в выражении нету 
+    # проверяем, что в выражении нету
     # букв и что оно начинается с цифры
     for i in 'QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm':
         while i in st:
@@ -27,15 +27,16 @@ def power_function(entrance_str):
     if st.count('@') != 0:
         raise ValueError("Неподдерживаемые символы: буквы")
     if entrance_str[0] not in '0123456789':
-        raise ValueError("Некорректно введено выражение: начинается не с цифры")
+        raise ValueError(
+            "Некорректно введено выражение: начинается не с цифры")
 
-    for i in '-+*/^':
+    for i in '-+*/^~':
         entrance_str = entrance_str.replace(i, ' '+str(i))
 
     # убираем все пробелы
     while '  ' in entrance_str:
         entrance_str = entrance_str.replace('  ', ' ')
-    for i in '-+/*^':
+    for i in '-+/*^~':
         if i + '))' in st:
             raise ValueError("Некорректно введено выражение")
 
@@ -92,7 +93,11 @@ def power_function(entrance_str):
         pop(a)
         push(a, y ** x)
 
-    
+    def unmin(a):  # унарный минус
+        x = float(peek(a))
+        pop(a)
+        push(a, -x)
+
     # анализируем выражение, чтобы
     # получить ответ(считаем)
     for i in mas:
@@ -116,6 +121,10 @@ def power_function(entrance_str):
             if len(a) < 2:
                 raise ValueError("Некорректно введено выражение")
             step(a)
+        elif i == '~':
+            if len(a) < 2:
+                raise ValueError("Некорректно введено выражение")
+            unmin(a)
         else:
             if i in '<>,?/!`@";:[]{}=_&%#№':
                 raise ValueError("Неподдерживаемая операция")
