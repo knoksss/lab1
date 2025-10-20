@@ -39,6 +39,8 @@ def power_function(entrance_str):
     for i in '-+/*^~':
         if i + '))' in st:
             raise ValueError("Некорректно введено выражение")
+    if '))' in st or '((' in st:
+        raise ValueError("Некорректно введено выражение")
 
     mas = entrance_str.split()
 
