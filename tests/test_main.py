@@ -1,5 +1,5 @@
 
-from power import power_function
+from src.power import power_function
 import pytest
 
 
