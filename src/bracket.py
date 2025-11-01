@@ -1,4 +1,5 @@
-from calculate import calcul
+from src.calculate import calcul
+from src.errors import BracketBalanceError
 
 def bracket_analize(entrance_str):
 
@@ -26,8 +27,7 @@ def bracket_analize(entrance_str):
 
         # если не было надейдено ни одной ( или ни одной )
         if open == -1 or close == -1:
-            raise ValueError(
-                "Некорректно введено выражение: несбалансированные скобки")
+            raise BracketBalanceError("Некорректно введено выражение: несбалансированные скобки")
 
         # срезом забираем выражение внутри скобок, чтобы посчитать его
         str_without = symb[open + 1:close]

@@ -1,5 +1,5 @@
 
-from power import main_function
+from src.power import main_function
 
 
 def main() -> None:

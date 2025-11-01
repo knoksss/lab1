@@ -1,45 +1,36 @@
-from bracket import bracket_analize
-from calculate import calcul
+from src.bracket import bracket_analize
+from src.calculate import calcul
+from src.errors import SymbolError
+from src.errors import BracketError
 
 
 def main_function(entrance_str):
 
-    st = entrance_str
-
     # проверяем, что в выражении есть знаки
     count_sign = 0
-    for i in '-+*/^~':
-        if st.count(i) != 0:
+    for i in '-+*/^~%':
+        if entrance_str.count(i) != 0:
             count_sign += 1
     if count_sign == 0:
-        raise ValueError("Некорректно введено выражение")
+        raise ValueError('Некорректно введено выражение: не содержит знаков')
 
     # проверяем, что в выражении нету
     # букв и что оно начинается с цифры
-    for i in 'QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm':
-        while i in st:
-            st = st.replace(i, '@')
-    for i in 'йцукенгшщзхъфывапролджэячсмитьбюЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ':
-        while i in st:
-            st = st.replace(i, '@')
-    if st.count('@') != 0:
-        raise ValueError("Неподдерживаемые символы: буквы")
+    for i in entrance_str:
+        if not i.isdigit():
+            if not (i in '-+/*~().%^ '):
+                raise SymbolError("Неподдерживаемые символы")
+            
     if entrance_str[0] not in '0123456789(':
         raise ValueError(
             "Некорректно введено выражение: начинается не с цифры")
 
-    for i in '-+*/^~':
-        entrance_str = entrance_str.replace(i, ' '+str(i))
-
-    # убираем все пробелы
-    while '  ' in entrance_str:
-        entrance_str = entrance_str.replace('  ', ' ')
     for i in '-+/*^~':
-        if i + '))' in st:
-            raise ValueError("Некорректно введено выражение")
-    if '))' in st or '((' in st:
-        raise ValueError("Некорректно введено выражение")
+        if i + '))' in entrance_str:
+            raise BracketError("Некорректно записано выражение со скобками")
+    if '))' in entrance_str or '((' in entrance_str:
+        raise BracketError("Некорректно записано выражение со скобками")
 
-    brackets_anaziled_str = bracket_analize(st)
+    brackets_anaziled_str = bracket_analize(entrance_str)
     result = calcul(brackets_anaziled_str)
     return result
